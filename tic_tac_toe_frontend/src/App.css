@@ -1,5 +1,5 @@
 /* =========================================================
-   App Layout & Game Card Styles
+   App Layout & Game Card Styles – Playful Edition
    ========================================================= */
 
 /* --- Full-page wrapper ---------------------------------- */
@@ -16,69 +16,85 @@
   animation: scaleIn 0.5s ease forwards;
 }
 
-/* --- Animated mesh background gradient ----------------- */
+/* --- Animated rainbow mesh background ------------------ */
 .app::before {
   content: '';
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 15% 10%, rgba(59, 130, 246, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 70% 50% at 85% 90%, rgba(6, 182, 212, 0.08) 0%, transparent 60%);
+    radial-gradient(ellipse 80% 60% at 10% 5%,  rgba(108, 71, 255, 0.14) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 90% 95%,  rgba(255, 106, 193, 0.13) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 45% at 55% 50%,  rgba(34, 210, 122, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 20%,  rgba(255, 92, 122, 0.08) 0%, transparent 55%);
   pointer-events: none;
   z-index: 0;
-  animation: bgShift 12s ease-in-out infinite alternate;
+  animation: bgShift 14s ease-in-out infinite alternate;
 }
 
 @keyframes bgShift {
-  0%   { opacity: 0.7; }
+  0%   { opacity: 0.65; }
   50%  { opacity: 1; }
-  100% { opacity: 0.7; }
+  100% { opacity: 0.65; }
 }
 
-/* --- Decorative blobs (purely visual) ------------------ */
+/* --- Decorative blobs ---------------------------------- */
 .app__blob {
   position: fixed;
   border-radius: 50%;
-  filter: blur(70px);
-  opacity: 0.15;
+  filter: blur(72px);
+  opacity: 0.22;
   pointer-events: none;
   z-index: 0;
-  animation: blobDrift 18s ease-in-out infinite alternate;
+  animation: blobDrift 20s ease-in-out infinite alternate;
 }
 
+/* Violet blob top-right */
 .app__blob--1 {
-  width: 480px;
-  height: 480px;
-  background: radial-gradient(circle, var(--color-primary), transparent 70%);
-  top: -160px;
-  right: -120px;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, #6c47ff 0%, transparent 70%);
+  top: -180px;
+  right: -140px;
   animation-delay: 0s;
 }
 
+/* Pink blob bottom-left */
 .app__blob--2 {
-  width: 380px;
-  height: 380px;
-  background: radial-gradient(circle, var(--color-accent), transparent 70%);
-  bottom: -120px;
-  left: -100px;
-  animation-delay: -6s;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #ff6ac1 0%, transparent 70%);
+  bottom: -130px;
+  left: -110px;
+  animation-delay: -7s;
 }
 
+/* Mint blob center-left */
 .app__blob--3 {
-  width: 260px;
-  height: 260px;
-  background: radial-gradient(circle, var(--color-primary), transparent 70%);
-  top: 40%;
-  left: -60px;
-  opacity: 0.08;
-  animation-delay: -3s;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, #22d27a 0%, transparent 70%);
+  top: 42%;
+  left: -70px;
+  opacity: 0.14;
+  animation-delay: -3.5s;
+}
+
+/* Orange blob top-center */
+.app__blob--4 {
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, #ff9f43 0%, transparent 70%);
+  top: -60px;
+  left: 45%;
+  opacity: 0.13;
+  animation-delay: -11s;
 }
 
 @keyframes blobDrift {
-  0%   { transform: translate(0, 0) scale(1); }
-  33%  { transform: translate(20px, -20px) scale(1.05); }
-  66%  { transform: translate(-15px, 15px) scale(0.97); }
-  100% { transform: translate(10px, -10px) scale(1.02); }
+  0%   { transform: translate(0, 0)       scale(1); }
+  33%  { transform: translate(22px, -22px) scale(1.05); }
+  66%  { transform: translate(-16px, 16px) scale(0.97); }
+  100% { transform: translate(12px, -12px) scale(1.03); }
 }
 
 /* --- Game card ------------------------------------------ */
@@ -86,7 +102,7 @@
   position: relative;
   z-index: 1;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-border);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-xl);
   padding: 36px 32px 32px;
@@ -98,23 +114,45 @@
   gap: 22px;
   animation: fadeSlideUp 0.5s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
   backdrop-filter: blur(2px);
-  transition: box-shadow var(--transition-slow);
+  transition: box-shadow var(--transition-slow), border-color var(--transition-slow);
 }
 
 .game-card:hover {
-  box-shadow: var(--shadow-xl);
+  border-color: #c4b5fd;
+  box-shadow:
+    0 24px 70px rgba(108, 71, 255, 0.26),
+    0 8px 28px rgba(0,0,0,0.10);
 }
 
-/* Subtle inner highlight on top edge */
+/* Rainbow top-edge highlight */
 .game-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  background: linear-gradient(90deg, #6c47ff, #ff6ac1, #ff9f43, #22d27a, #5b5ef4);
+  background-size: 200% 100%;
+  animation: rainbowSlide 4s linear infinite;
+}
+
+@keyframes rainbowSlide {
+  0%   { background-position: 0%   50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Subtle inner highlight */
+.game-card::after {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: var(--radius-xl);
   background: linear-gradient(
-    135deg,
-    rgba(255,255,255,0.6) 0%,
-    rgba(255,255,255,0) 60%
+    145deg,
+    rgba(255,255,255,0.55) 0%,
+    rgba(255,255,255,0) 55%
   );
   pointer-events: none;
   z-index: 0;
@@ -128,10 +166,10 @@
 }
 
 .game-card__title {
-  font-size: clamp(2.2rem, 9vw, 3rem);
-  font-weight: 800;
+  font-size: clamp(2.4rem, 9vw, 3.2rem);
+  font-weight: 900;
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -141,37 +179,52 @@
 .game-card__title-x {
   color: var(--color-x);
   display: inline-block;
-  text-shadow: 0 2px 12px var(--color-x-shadow);
+  text-shadow:
+    0 0 18px var(--color-x-glow),
+    0 2px 12px var(--color-x-shadow);
   transition: transform var(--transition-bounce);
+  /* Inline drop-shadow filter for extra pop */
+  filter: drop-shadow(0 2px 6px var(--color-x-shadow));
 }
 
 .game-card__title-x:hover {
-  transform: scale(1.15) rotate(-5deg);
+  transform: scale(1.2) rotate(-8deg);
 }
 
 .game-card__title-sep {
-  color: var(--color-border);
+  background: linear-gradient(135deg, #6c47ff, #ff6ac1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   font-weight: 300;
+  opacity: 0.7;
 }
 
 .game-card__title-o {
   color: var(--color-o);
   display: inline-block;
-  text-shadow: 0 2px 12px var(--color-o-shadow);
+  text-shadow:
+    0 0 18px var(--color-o-glow),
+    0 2px 12px var(--color-o-shadow);
   transition: transform var(--transition-bounce);
+  filter: drop-shadow(0 2px 6px var(--color-o-shadow));
 }
 
 .game-card__title-o:hover {
-  transform: scale(1.15) rotate(5deg);
+  transform: scale(1.2) rotate(8deg);
 }
 
 .game-card__subtitle {
-  margin-top: 6px;
-  font-size: 0.83rem;
-  color: var(--color-text-muted);
-  font-weight: 400;
-  letter-spacing: 0.04em;
+  margin-top: 7px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.75;
 }
 
 /* --- Controls (Reset / New Game button) ---------------- */
@@ -190,13 +243,13 @@
   justify-content: center;
   gap: 8px;
   width: 100%;
-  padding: 13px 28px;
+  padding: 14px 28px;
   border: none;
   border-radius: var(--radius-md);
   font-family: var(--font-family);
   font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-weight: 800;
+  letter-spacing: 0.06em;
   cursor: pointer;
   transition:
     background var(--transition),
@@ -207,6 +260,7 @@
   position: relative;
   overflow: hidden;
   user-select: none;
+  text-transform: uppercase;
 }
 
 /* Ripple overlay */
@@ -214,35 +268,36 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.22);
   opacity: 0;
   border-radius: inherit;
   transition: opacity 0.2s ease;
 }
 
-.btn:hover::after {
-  opacity: 1;
-}
+.btn:hover::after  { opacity: 1; }
 
 .btn:focus-visible {
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 0 0 3px rgba(108, 71, 255, 0.45);
 }
 
 .btn:active {
   transform: scale(0.96);
 }
 
-/* Primary variant */
+/* Primary variant — vivid gradient */
 .btn--primary {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(135deg, #6c47ff 0%, #ff6ac1 100%);
   color: #ffffff;
-  box-shadow: 0 2px 10px var(--color-x-shadow), 0 1px 3px rgba(0,0,0,0.1);
-  text-transform: uppercase;
+  box-shadow:
+    0 4px 18px rgba(108, 71, 255, 0.40),
+    0 1px 4px rgba(0,0,0,0.10);
 }
 
 .btn--primary:hover {
-  background: linear-gradient(135deg, var(--color-primary-dark) 0%, #1d4ed8 100%);
-  box-shadow: 0 6px 20px var(--color-x-shadow), 0 2px 8px rgba(0,0,0,0.12);
+  background: linear-gradient(135deg, #5534e0 0%, #e0579f 100%);
+  box-shadow:
+    0 8px 28px rgba(108, 71, 255, 0.50),
+    0 2px 8px rgba(0,0,0,0.12);
   transform: translateY(-2px);
 }
 
@@ -260,21 +315,28 @@
 .app__footer {
   margin-top: 20px;
   font-size: 0.78rem;
-  color: var(--color-text-muted);
-  letter-spacing: 0.04em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   z-index: 1;
   position: relative;
   display: flex;
   align-items: center;
   gap: 6px;
+  opacity: 0.7;
 }
 
 .app__footer-dot {
-  width: 3px;
-  height: 3px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  background: var(--color-text-muted);
+  background: var(--color-primary);
   opacity: 0.5;
+  -webkit-text-fill-color: initial; /* revert for the dot */
 }
 
 /* --- Confetti burst overlay ---------------------------- */

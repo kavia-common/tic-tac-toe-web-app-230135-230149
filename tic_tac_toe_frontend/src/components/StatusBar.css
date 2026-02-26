@@ -1,5 +1,5 @@
 /* =========================================================
-   StatusBar Component Styles
+   StatusBar Component Styles – Playful Edition
    ========================================================= */
 .status-bar {
   display: flex;
@@ -8,8 +8,8 @@
   padding: 13px 20px;
   border-radius: var(--radius-md);
   font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   transition:
     background var(--transition),
     color var(--transition),
@@ -20,7 +20,7 @@
   position: relative;
   z-index: 1;
   overflow: hidden;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
 }
 
 /* Shimmer strip on the status bar */
@@ -31,7 +31,7 @@
   background: linear-gradient(
     110deg,
     transparent 25%,
-    rgba(255,255,255,0.2) 50%,
+    rgba(255,255,255,0.28) 50%,
     transparent 75%
   );
   transform: translateX(-100%);
@@ -39,7 +39,7 @@
 }
 
 .status-bar--winner::before {
-  animation: statusShimmer 1.2s ease 0.2s forwards;
+  animation: statusShimmer 1.2s ease 0.15s forwards;
 }
 
 @keyframes statusShimmer {
@@ -50,8 +50,8 @@
 /* Coloured indicator dot */
 .status-bar__indicator {
   display: inline-block;
-  width: 10px;
-  height: 10px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
   flex-shrink: 0;
   transition: background var(--transition), box-shadow var(--transition);
@@ -59,82 +59,90 @@
 
 /* Pulsing dot when it's a player's turn */
 .status-bar--playing .status-bar__indicator {
-  animation: dotPulse 1.6s ease-in-out infinite;
+  animation: dotPulse 1.5s ease-in-out infinite;
 }
 
 @keyframes dotPulse {
   0%, 100% { transform: scale(1);    opacity: 1; }
-  50%       { transform: scale(1.25); opacity: 0.7; }
+  50%       { transform: scale(1.30); opacity: 0.7; }
 }
 
-/* Turn indicator for X */
+/* Turn indicator for X — violet */
 .status-bar--playing.status-bar--x {
-  background: var(--color-x-bg);
+  background: linear-gradient(135deg, #eeeeff 0%, #f5f3ff 100%);
   color: var(--color-x);
-  border-color: rgba(59, 130, 246, 0.2);
+  border-color: rgba(91, 94, 244, 0.25);
 }
 
 .status-bar--playing.status-bar--x .status-bar__indicator {
   background: var(--color-x);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+  box-shadow: 0 0 0 4px rgba(91, 94, 244, 0.20);
 }
 
-/* Turn indicator for O */
+/* Turn indicator for O — coral */
 .status-bar--playing.status-bar--o {
-  background: var(--color-o-bg);
+  background: linear-gradient(135deg, #fff0f3 0%, #fff5f7 100%);
   color: var(--color-o);
-  border-color: rgba(6, 182, 212, 0.2);
+  border-color: rgba(255, 92, 122, 0.25);
 }
 
 .status-bar--playing.status-bar--o .status-bar__indicator {
   background: var(--color-o);
-  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.18);
+  box-shadow: 0 0 0 4px rgba(255, 92, 122, 0.20);
 }
 
 /* Winner state */
 .status-bar--winner {
   animation: statusPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
   font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  font-weight: 800;
+  letter-spacing: 0.03em;
 }
 
 .status-bar--winner.status-bar--x {
-  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  background: linear-gradient(135deg, #d5d6ff 0%, #eeeeff 100%);
   color: var(--color-x);
-  border-color: rgba(59, 130, 246, 0.3);
-  box-shadow: 0 2px 12px var(--color-x-shadow);
+  border-color: rgba(91, 94, 244, 0.35);
+  box-shadow: 0 4px 18px var(--color-x-shadow);
 }
 
 .status-bar--winner.status-bar--x .status-bar__indicator {
   background: var(--color-x);
-  box-shadow: none;
+  box-shadow: 0 0 8px var(--color-x-glow);
   animation: none;
 }
 
 .status-bar--winner.status-bar--o {
-  background: linear-gradient(135deg, #ecfeff 0%, #cffafe 100%);
+  background: linear-gradient(135deg, #ffccd6 0%, #fff0f3 100%);
   color: var(--color-o);
-  border-color: rgba(6, 182, 212, 0.3);
-  box-shadow: 0 2px 12px var(--color-o-shadow);
+  border-color: rgba(255, 92, 122, 0.35);
+  box-shadow: 0 4px 18px var(--color-o-shadow);
 }
 
 .status-bar--winner.status-bar--o .status-bar__indicator {
   background: var(--color-o);
-  box-shadow: none;
+  box-shadow: 0 0 8px var(--color-o-glow);
   animation: none;
 }
 
-/* Draw state */
+/* Draw state — rainbow gradient text & warm bg */
 .status-bar--draw {
-  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-  color: var(--color-secondary);
-  border-color: var(--color-border);
+  background: linear-gradient(135deg, #f5f0ff, #fff0f5, #f0fff8);
+  color: transparent;
+  border-color: #dcd3f5;
   animation: statusPop 0.4s cubic-bezier(0.34, 1.3, 0.64, 1);
 }
 
+.status-bar--draw .status-bar__text {
+  background: linear-gradient(90deg, #6c47ff, #ff6ac1, #ff9f43);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+}
+
 .status-bar--draw .status-bar__indicator {
-  background: var(--color-secondary);
+  background: linear-gradient(135deg, #6c47ff, #ff6ac1);
   animation: none;
 }
 
@@ -146,31 +154,37 @@
 
 /* Trophy / emoji icon next to winner */
 .status-bar__icon {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   line-height: 1;
-  animation: iconBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+  animation: iconBounce 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both;
   flex-shrink: 0;
 }
 
 @keyframes iconBounce {
-  from { transform: scale(0) rotate(-20deg); opacity: 0; }
+  from { transform: scale(0) rotate(-25deg); opacity: 0; }
   to   { transform: scale(1) rotate(0deg);   opacity: 1; }
 }
 
 @keyframes statusPop {
-  from { transform: scale(0.94); opacity: 0.6; }
+  from { transform: scale(0.92); opacity: 0.5; }
   to   { transform: scale(1);    opacity: 1; }
 }
 
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
+  .status-bar--playing.status-bar--x {
+    background: linear-gradient(135deg, rgba(91,94,244,0.20) 0%, rgba(91,94,244,0.10) 100%);
+  }
+  .status-bar--playing.status-bar--o {
+    background: linear-gradient(135deg, rgba(255,92,122,0.18) 0%, rgba(255,92,122,0.09) 100%);
+  }
   .status-bar--winner.status-bar--x {
-    background: linear-gradient(135deg, rgba(59,130,246,0.2) 0%, rgba(59,130,246,0.1) 100%);
+    background: linear-gradient(135deg, rgba(91,94,244,0.30) 0%, rgba(91,94,244,0.15) 100%);
   }
   .status-bar--winner.status-bar--o {
-    background: linear-gradient(135deg, rgba(6,182,212,0.2) 0%, rgba(6,182,212,0.1) 100%);
+    background: linear-gradient(135deg, rgba(255,92,122,0.28) 0%, rgba(255,92,122,0.13) 100%);
   }
   .status-bar--draw {
-    background: linear-gradient(135deg, rgba(100,116,139,0.15), rgba(100,116,139,0.08));
+    background: linear-gradient(135deg, rgba(108,71,255,0.15), rgba(255,106,193,0.10), rgba(34,210,122,0.10));
   }
 }

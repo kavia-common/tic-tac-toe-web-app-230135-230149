@@ -7,10 +7,14 @@ import './App.css';
 
 /* ---- Confetti helpers ---------------------------------- */
 
-/** Colour palette for confetti pieces */
+/**
+ * Vivid, playful colour palette for confetti pieces.
+ * Matches the new violet × coral × mint × gold theme.
+ */
 const CONFETTI_COLORS = [
-  '#3b82f6', '#06b6d4', '#8b5cf6',
-  '#f59e0b', '#10b981', '#ef4444',
+  '#6c47ff', '#ff6ac1', '#ff5c7a',
+  '#22d27a', '#ff9f43', '#5b5ef4',
+  '#ffdd59', '#48dbfb',
 ];
 
 /**
@@ -22,22 +26,24 @@ function spawnConfettiPiece(container) {
   const el = document.createElement('div');
   el.className = 'confetti-piece';
 
-  const size    = 6 + Math.random() * 9;           // 6–15 px
-  const left    = Math.random() * 100;              // 0–100 %
-  const delay   = Math.random() * 0.6;              // 0–0.6 s
-  const dur     = 1.4 + Math.random() * 1.2;        // 1.4–2.6 s
-  const color   = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
+  const size     = 6 + Math.random() * 10;           // 6–16 px
+  const left     = Math.random() * 100;              // 0–100 %
+  const delay    = Math.random() * 0.7;              // 0–0.7 s
+  const dur      = 1.5 + Math.random() * 1.3;        // 1.5–2.8 s
+  const color    = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
   const isCircle = Math.random() > 0.5;
+  const isStar   = !isCircle && Math.random() > 0.7; // ~15% chance of a wide rectangle
 
   el.style.cssText = [
     `width: ${size}px`,
-    `height: ${size}px`,
+    `height: ${isStar ? size * 0.4 : size}px`,
     `left: ${left}%`,
     `background: ${color}`,
     `animation-duration: ${dur}s`,
     `animation-delay: ${delay}s`,
-    `border-radius: ${isCircle ? '50%' : '2px'}`,
+    `border-radius: ${isCircle ? '50%' : '3px'}`,
     `transform: rotate(${Math.random() * 360}deg)`,
+    `opacity: 0.9`,
   ].join('; ');
 
   container.appendChild(el);
@@ -51,7 +57,7 @@ function spawnConfettiPiece(container) {
  * @param {HTMLElement} container
  * @param {number}      count
  */
-function launchConfetti(container, count = 60) {
+function launchConfetti(container, count = 75) {
   for (let i = 0; i < count; i++) {
     spawnConfettiPiece(container);
   }
@@ -87,7 +93,7 @@ function App() {
   useEffect(() => {
     if (winner && !confettiFiredRef.current && confettiRef.current) {
       confettiFiredRef.current = true;
-      launchConfetti(confettiRef.current, 70);
+      launchConfetti(confettiRef.current, 80);
     }
     if (!winner) {
       confettiFiredRef.current = false;
@@ -108,6 +114,7 @@ function App() {
       <div className="app__blob app__blob--1" aria-hidden="true" />
       <div className="app__blob app__blob--2" aria-hidden="true" />
       <div className="app__blob app__blob--3" aria-hidden="true" />
+      <div className="app__blob app__blob--4" aria-hidden="true" />
 
       {/* ---- Confetti overlay (winner celebration) ---- */}
       <div

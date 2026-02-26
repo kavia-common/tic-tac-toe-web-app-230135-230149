@@ -1,15 +1,70 @@
-import React from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import useGameLogic from './hooks/useGameLogic';
 import Board from './components/Board';
 import StatusBar from './components/StatusBar';
 import ScoreBoard from './components/ScoreBoard';
 import './App.css';
 
+/* ---- Confetti helpers ---------------------------------- */
+
+/** Colour palette for confetti pieces */
+const CONFETTI_COLORS = [
+  '#3b82f6', '#06b6d4', '#8b5cf6',
+  '#f59e0b', '#10b981', '#ef4444',
+];
+
+/**
+ * Creates a single confetti DOM element with a random style and appends it
+ * to the provided container element.
+ * @param {HTMLElement} container
+ */
+function spawnConfettiPiece(container) {
+  const el = document.createElement('div');
+  el.className = 'confetti-piece';
+
+  const size    = 6 + Math.random() * 9;           // 6–15 px
+  const left    = Math.random() * 100;              // 0–100 %
+  const delay   = Math.random() * 0.6;              // 0–0.6 s
+  const dur     = 1.4 + Math.random() * 1.2;        // 1.4–2.6 s
+  const color   = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
+  const isCircle = Math.random() > 0.5;
+
+  el.style.cssText = [
+    `width: ${size}px`,
+    `height: ${size}px`,
+    `left: ${left}%`,
+    `background: ${color}`,
+    `animation-duration: ${dur}s`,
+    `animation-delay: ${delay}s`,
+    `border-radius: ${isCircle ? '50%' : '2px'}`,
+    `transform: rotate(${Math.random() * 360}deg)`,
+  ].join('; ');
+
+  container.appendChild(el);
+
+  // Self-clean after the animation finishes
+  el.addEventListener('animationend', () => el.remove(), { once: true });
+}
+
+/**
+ * Launches a burst of confetti by spawning N pieces into a container div.
+ * @param {HTMLElement} container
+ * @param {number}      count
+ */
+function launchConfetti(container, count = 60) {
+  for (let i = 0; i < count; i++) {
+    spawnConfettiPiece(container);
+  }
+}
+
+/* ---- App component ------------------------------------ */
+
 /**
  * App – Root component for the Tic Tac Toe game.
  *
  * Composes all child components and supplies game state from the
  * useGameLogic hook. Keeps rendering and business logic decoupled.
+ * Triggers a confetti burst when a player wins.
  */
 function App() {
   const {
@@ -24,11 +79,42 @@ function App() {
     scores,
   } = useGameLogic();
 
+  const confettiRef = useRef(null);
+  // Track whether we've already fired confetti for this win
+  const confettiFiredRef = useRef(false);
+
+  // Fire confetti when a player wins (only once per win)
+  useEffect(() => {
+    if (winner && !confettiFiredRef.current && confettiRef.current) {
+      confettiFiredRef.current = true;
+      launchConfetti(confettiRef.current, 70);
+    }
+    if (!winner) {
+      confettiFiredRef.current = false;
+    }
+  }, [winner]);
+
+  /**
+   * Wraps resetGame to also clear confetti state.
+   */
+  const handleReset = useCallback(() => {
+    confettiFiredRef.current = false;
+    resetGame();
+  }, [resetGame]);
+
   return (
     <div className="app">
       {/* ---- Background decorative blobs ---- */}
       <div className="app__blob app__blob--1" aria-hidden="true" />
       <div className="app__blob app__blob--2" aria-hidden="true" />
+      <div className="app__blob app__blob--3" aria-hidden="true" />
+
+      {/* ---- Confetti overlay (winner celebration) ---- */}
+      <div
+        className="confetti-container"
+        ref={confettiRef}
+        aria-hidden="true"
+      />
 
       {/* ---- Main card ---- */}
       <main className="game-card" role="main">
@@ -42,10 +128,14 @@ function App() {
           <p className="game-card__subtitle">Two-player local game</p>
         </header>
 
-        {/* Scoreboard */}
-        <ScoreBoard scores={scores} />
+        {/* Scoreboard – shows active player highlight */}
+        <ScoreBoard
+          scores={scores}
+          currentPlayer={currentPlayer}
+          gameOver={gameOver}
+        />
 
-        {/* Status */}
+        {/* Status bar */}
         <StatusBar
           winner={winner}
           isDraw={isDraw}
@@ -53,21 +143,25 @@ function App() {
           gameOver={gameOver}
         />
 
-        {/* Game board */}
+        {/* Game board – passes currentPlayer for ghost preview */}
         <Board
           squares={squares}
           winningLine={winningLine}
           gameOver={gameOver}
           onCellClick={handleCellClick}
+          currentPlayer={currentPlayer}
         />
 
         {/* Controls */}
         <div className="game-card__controls">
           <button
             className="btn btn--primary"
-            onClick={resetGame}
-            aria-label="Start a new game"
+            onClick={handleReset}
+            aria-label={gameOver ? 'Start a new game' : 'Reset the current game'}
           >
+            <span className="btn__icon" aria-hidden="true">
+              {gameOver ? '▶' : '↺'}
+            </span>
             {gameOver ? 'New Game' : 'Reset'}
           </button>
         </div>
@@ -75,7 +169,9 @@ function App() {
 
       {/* Footer */}
       <footer className="app__footer" role="contentinfo">
-        <span>Tic Tac Toe &nbsp;·&nbsp; Local 2-player</span>
+        <span>Tic Tac Toe</span>
+        <span className="app__footer-dot" aria-hidden="true" />
+        <span>Local 2-player</span>
       </footer>
     </div>
   );

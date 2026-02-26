@@ -3,39 +3,123 @@
    ========================================================= */
 .scoreboard {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: space-between;
   width: 100%;
   max-width: 340px;
   margin: 0 auto;
-  background: var(--color-surface);
+  background: var(--color-surface-2);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: 14px 18px;
+  padding: 0;
   box-shadow: var(--shadow-sm);
-  gap: 8px;
+  gap: 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
 }
 
+/* --- Player columns ---- */
 .scoreboard__player {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 4px;
   flex: 1;
+  padding: 14px 10px;
+  transition:
+    background var(--transition),
+    box-shadow var(--transition);
+  position: relative;
 }
 
+/* Active player highlight */
+.scoreboard__player--active {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.scoreboard__player--active.scoreboard__player--o {
+  background: rgba(6, 182, 212, 0.05);
+}
+
+/* Pulse ring behind active player indicator */
+.scoreboard__player--active::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: pulseRing 1.8s ease-in-out infinite;
+}
+
+.scoreboard__player--x.scoreboard__player--active::before {
+  background: var(--color-x);
+  box-shadow: 0 0 0 4px var(--color-x-shadow);
+}
+
+.scoreboard__player--o.scoreboard__player--active::before {
+  background: var(--color-o);
+  box-shadow: 0 0 0 4px var(--color-o-shadow);
+}
+
+/* Active indicator dot at the top of each player column */
+.scoreboard__active-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-bottom: 2px;
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.scoreboard__player--active .scoreboard__active-dot {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.scoreboard__player:not(.scoreboard__player--active) .scoreboard__active-dot {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.scoreboard__player--x .scoreboard__active-dot {
+  background: var(--color-x);
+}
+
+.scoreboard__player--o .scoreboard__active-dot {
+  background: var(--color-o);
+}
+
+/* Labels */
 .scoreboard__label {
-  font-size: 0.78rem;
-  font-weight: 600;
+  font-size: 0.72rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   color: var(--color-text-muted);
+  white-space: nowrap;
 }
 
+/* Score value */
 .scoreboard__value {
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-size: 2rem;
+  font-weight: 800;
   line-height: 1;
+  transition: transform var(--transition-bounce), color var(--transition);
+}
+
+/* Animate the score number when it changes */
+.scoreboard__value--bump {
+  animation: scoreBump 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes scoreBump {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.4); }
+  100% { transform: scale(1); }
 }
 
 .scoreboard__player--x .scoreboard__value {
@@ -46,27 +130,38 @@
   color: var(--color-o);
 }
 
+/* --- Divider / Draws column ---- */
 .scoreboard__divider {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 4px;
-  padding: 0 12px;
+  padding: 14px 16px;
   border-left: 1px solid var(--color-border);
   border-right: 1px solid var(--color-border);
+  min-width: 72px;
 }
 
 .scoreboard__draws-label {
-  font-size: 0.78rem;
-  font-weight: 600;
+  font-size: 0.72rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   color: var(--color-text-muted);
 }
 
 .scoreboard__draws-value {
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-size: 2rem;
+  font-weight: 800;
   color: var(--color-secondary);
   line-height: 1;
+}
+
+/* Responsive: smaller padding on tiny screens */
+@media (max-width: 360px) {
+  .scoreboard__player { padding: 12px 6px; }
+  .scoreboard__divider { padding: 12px 10px; min-width: 60px; }
+  .scoreboard__value,
+  .scoreboard__draws-value { font-size: 1.7rem; }
 }

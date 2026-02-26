@@ -1,0 +1,20 @@
+/* =========================================================
+   Board Component Styles
+   ========================================================= */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+/* Responsive tweaks */
+@media (max-width: 400px) {
+  .board {
+    gap: 7px;
+    max-width: 300px;
+  }
+}

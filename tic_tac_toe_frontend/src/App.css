@@ -1,0 +1,172 @@
+/* =========================================================
+   App Layout & Game Card Styles
+   ========================================================= */
+
+/* --- Full-page wrapper ---------------------------------- */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px 16px;
+  position: relative;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+/* --- Decorative blobs (purely visual) ------------------ */
+.app__blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app__blob--1 {
+  width: 420px;
+  height: 420px;
+  background: var(--color-primary);
+  top: -120px;
+  right: -100px;
+}
+
+.app__blob--2 {
+  width: 340px;
+  height: 340px;
+  background: var(--color-accent);
+  bottom: -100px;
+  left: -80px;
+}
+
+/* --- Game card ------------------------------------------ */
+.game-card {
+  position: relative;
+  z-index: 1;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 32px 28px 28px;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* --- Header -------------------------------------------- */
+.game-card__header {
+  text-align: center;
+}
+
+.game-card__title {
+  font-size: clamp(2rem, 8vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.game-card__title-x {
+  color: var(--color-x);
+}
+
+.game-card__title-sep {
+  color: var(--color-border);
+}
+
+.game-card__title-o {
+  color: var(--color-o);
+}
+
+.game-card__subtitle {
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* --- Controls (Reset / New Game button) ---------------- */
+.game-card__controls {
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+/* --- Button base --------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-family);
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition:
+    background var(--transition),
+    transform var(--transition),
+    box-shadow var(--transition);
+  outline: none;
+}
+
+.btn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* Primary variant */
+.btn--primary {
+  background: var(--color-primary);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.35);
+}
+
+.btn--primary:hover {
+  background: var(--color-primary-dark);
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.45);
+  transform: translateY(-1px);
+}
+
+/* --- Footer -------------------------------------------- */
+.app__footer {
+  margin-top: 20px;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.03em;
+  z-index: 1;
+  position: relative;
+}
+
+/* --- Responsive ---------------------------------------- */
+@media (max-width: 480px) {
+  .game-card {
+    padding: 24px 16px 20px;
+    gap: 16px;
+    border-radius: var(--radius-md);
+  }
+
+  .app {
+    padding: 16px 12px 12px;
+    justify-content: flex-start;
+    padding-top: 32px;
+  }
+}
+
+@media (min-height: 700px) and (max-width: 480px) {
+  .app {
+    justify-content: center;
+  }
+}

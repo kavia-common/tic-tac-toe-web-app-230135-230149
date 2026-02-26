@@ -1,5 +1,5 @@
 /* =========================================================
-   Global Reset & Base Styles
+   Global Reset & Base Styles – Light Theme
    ========================================================= */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -10,41 +10,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
 
 :root {
-  /* ---- Playful color palette ---- */
-  --color-primary:       #6c47ff;   /* vivid violet */
-  --color-primary-dark:  #4f2eda;
-  --color-primary-light: #ede9ff;
-  --color-accent:        #ff6ac1;   /* hot pink */
-  --color-accent-dark:   #d94fa0;
-  --color-accent-light:  #ffe0f5;
-  --color-secondary:     #7c8db5;
-  --color-success:       #22d27a;
-  --color-error:         #ff4b6e;
+  /* ---- Light color palette (blue & cyan accents) ---- */
+  --color-primary:       #3b82f6;   /* bright blue */
+  --color-primary-dark:  #2563eb;
+  --color-primary-light: #eff6ff;
+  --color-accent:        #06b6d4;   /* cyan */
+  --color-accent-dark:   #0891b2;
+  --color-accent-light:  #ecfeff;
+  --color-secondary:     #64748b;
+  --color-success:       #06b6d4;
+  --color-error:         #EF4444;
 
   /* ---- Backgrounds ---- */
-  --color-bg:            #f5f0ff;   /* soft lavender page bg */
+  --color-bg:            #f9fafb;   /* very light gray */
   --color-surface:       #ffffff;
-  --color-surface-2:     #faf8ff;
+  --color-surface-2:     #f3f4f6;
 
   /* ---- Text ---- */
-  --color-text:          #1a1040;
-  --color-text-muted:    #7c6fa8;
+  --color-text:          #111827;
+  --color-text-muted:    #6b7280;
 
   /* ---- Borders ---- */
-  --color-border:        #dcd3f5;
-  --color-border-focus:  #a78bfa;
+  --color-border:        #e5e7eb;
+  --color-border-focus:  #93c5fd;
 
-  /* ---- Player X — vivid blue-violet ---- */
-  --color-x:             #5b5ef4;
-  --color-x-bg:          #eeeeff;
-  --color-x-shadow:      rgba(91, 94, 244, 0.30);
-  --color-x-glow:        rgba(91, 94, 244, 0.55);
+  /* ---- Player X — bright blue ---- */
+  --color-x:             #3b82f6;
+  --color-x-bg:          #eff6ff;
+  --color-x-shadow:      rgba(59, 130, 246, 0.25);
+  --color-x-glow:        rgba(59, 130, 246, 0.45);
 
-  /* ---- Player O — vivid coral/orange ---- */
-  --color-o:             #ff5c7a;
-  --color-o-bg:          #fff0f3;
-  --color-o-shadow:      rgba(255, 92, 122, 0.28);
-  --color-o-glow:        rgba(255, 92, 122, 0.55);
+  /* ---- Player O — vivid cyan ---- */
+  --color-o:             #06b6d4;
+  --color-o-bg:          #ecfeff;
+  --color-o-shadow:      rgba(6, 182, 212, 0.25);
+  --color-o-glow:        rgba(6, 182, 212, 0.45);
 
   /* ---- Radii ---- */
   --radius-sm:           6px;
@@ -52,11 +52,11 @@
   --radius-lg:           22px;
   --radius-xl:           30px;
 
-  /* ---- Shadows ---- */
-  --shadow-sm:           0 1px 4px rgba(108, 71, 255, 0.08), 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-md:           0 4px 18px rgba(108, 71, 255, 0.13), 0 2px 6px rgba(0,0,0,0.06);
-  --shadow-lg:           0 12px 40px rgba(108, 71, 255, 0.18), 0 4px 16px rgba(0,0,0,0.08);
-  --shadow-xl:           0 20px 60px rgba(108, 71, 255, 0.22), 0 8px 24px rgba(0,0,0,0.10);
+  /* ---- Shadows — lighter, subtler ---- */
+  --shadow-sm:           0 1px 4px rgba(59, 130, 246, 0.07), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:           0 4px 18px rgba(59, 130, 246, 0.10), 0 2px 6px rgba(0,0,0,0.05);
+  --shadow-lg:           0 12px 40px rgba(59, 130, 246, 0.13), 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-xl:           0 20px 60px rgba(59, 130, 246, 0.15), 0 8px 24px rgba(0,0,0,0.08);
 
   /* ---- Typography ---- */
   --font-family:         'Nunito', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -65,23 +65,6 @@
   --transition:          0.18s ease;
   --transition-slow:     0.35s ease;
   --transition-bounce:   0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg:           #100a2e;   /* deep space purple */
-    --color-surface:      #1a1040;
-    --color-surface-2:    #120d35;
-    --color-text:         #f0ecff;
-    --color-text-muted:   #9d8fd4;
-    --color-border:       #2e2660;
-    --color-border-focus: #7c5cf4;
-    --color-x-bg:         rgba(91, 94, 244, 0.18);
-    --color-o-bg:         rgba(255, 92, 122, 0.15);
-    --shadow-lg:          0 12px 40px rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0,0,0,0.3);
-    --shadow-xl:          0 20px 60px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(0,0,0,0.35);
-  }
 }
 
 html, body {

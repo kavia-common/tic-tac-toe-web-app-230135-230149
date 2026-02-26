@@ -12,9 +12,9 @@ import './App.css';
  * Matches the new violet × coral × mint × gold theme.
  */
 const CONFETTI_COLORS = [
-  '#6c47ff', '#ff6ac1', '#ff5c7a',
-  '#22d27a', '#ff9f43', '#5b5ef4',
-  '#ffdd59', '#48dbfb',
+  '#3b82f6', '#06b6d4', '#38bdf8',
+  '#7dd3fc', '#a5f3fc', '#2563eb',
+  '#0ea5e9', '#67e8f9',
 ];
 
 /**

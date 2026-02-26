@@ -1,5 +1,5 @@
 /* =========================================================
-   App Layout & Game Card Styles – Playful Edition
+   App Layout & Game Card Styles – Light Theme
    ========================================================= */
 
 /* --- Full-page wrapper ---------------------------------- */
@@ -16,16 +16,16 @@
   animation: scaleIn 0.5s ease forwards;
 }
 
-/* --- Animated rainbow mesh background ------------------ */
+/* --- Soft ambient light mesh background ---------------- */
 .app::before {
   content: '';
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 10% 5%,  rgba(108, 71, 255, 0.14) 0%, transparent 60%),
-    radial-gradient(ellipse 70% 50% at 90% 95%,  rgba(255, 106, 193, 0.13) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 45% at 55% 50%,  rgba(34, 210, 122, 0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 80% 20%,  rgba(255, 92, 122, 0.08) 0%, transparent 55%);
+    radial-gradient(ellipse 80% 60% at 10% 5%,  rgba(59, 130, 246, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 90% 95%,  rgba(6, 182, 212, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 45% at 55% 50%,  rgba(59, 130, 246, 0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 20%,  rgba(6, 182, 212, 0.06) 0%, transparent 55%);
   pointer-events: none;
   z-index: 0;
   animation: bgShift 14s ease-in-out infinite alternate;
@@ -42,51 +42,51 @@
   position: fixed;
   border-radius: 50%;
   filter: blur(72px);
-  opacity: 0.22;
+  opacity: 0.14;
   pointer-events: none;
   z-index: 0;
   animation: blobDrift 20s ease-in-out infinite alternate;
 }
 
-/* Violet blob top-right */
+/* Blue blob top-right */
 .app__blob--1 {
   width: 520px;
   height: 520px;
-  background: radial-gradient(circle, #6c47ff 0%, transparent 70%);
+  background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
   top: -180px;
   right: -140px;
   animation-delay: 0s;
 }
 
-/* Pink blob bottom-left */
+/* Cyan blob bottom-left */
 .app__blob--2 {
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, #ff6ac1 0%, transparent 70%);
+  background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
   bottom: -130px;
   left: -110px;
   animation-delay: -7s;
 }
 
-/* Mint blob center-left */
+/* Sky blue blob center-left */
 .app__blob--3 {
   width: 280px;
   height: 280px;
-  background: radial-gradient(circle, #22d27a 0%, transparent 70%);
+  background: radial-gradient(circle, #7dd3fc 0%, transparent 70%);
   top: 42%;
   left: -70px;
-  opacity: 0.14;
+  opacity: 0.10;
   animation-delay: -3.5s;
 }
 
-/* Orange blob top-center */
+/* Light cyan blob top-center */
 .app__blob--4 {
   width: 220px;
   height: 220px;
-  background: radial-gradient(circle, #ff9f43 0%, transparent 70%);
+  background: radial-gradient(circle, #a5f3fc 0%, transparent 70%);
   top: -60px;
   left: 45%;
-  opacity: 0.13;
+  opacity: 0.10;
   animation-delay: -11s;
 }
 
@@ -102,7 +102,7 @@
   position: relative;
   z-index: 1;
   background: var(--color-surface);
-  border: 2px solid var(--color-border);
+  border: 1.5px solid var(--color-border);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-xl);
   padding: 36px 32px 32px;
@@ -118,13 +118,13 @@
 }
 
 .game-card:hover {
-  border-color: #c4b5fd;
+  border-color: #bfdbfe;
   box-shadow:
-    0 24px 70px rgba(108, 71, 255, 0.26),
-    0 8px 28px rgba(0,0,0,0.10);
+    0 24px 70px rgba(59, 130, 246, 0.16),
+    0 8px 28px rgba(0,0,0,0.06);
 }
 
-/* Rainbow top-edge highlight */
+/* Blue-to-cyan top-edge highlight */
 .game-card::before {
   content: '';
   position: absolute;
@@ -133,7 +133,7 @@
   right: 0;
   height: 4px;
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-  background: linear-gradient(90deg, #6c47ff, #ff6ac1, #ff9f43, #22d27a, #5b5ef4);
+  background: linear-gradient(90deg, #3b82f6, #06b6d4, #3b82f6, #06b6d4);
   background-size: 200% 100%;
   animation: rainbowSlide 4s linear infinite;
 }
@@ -151,7 +151,7 @@
   border-radius: var(--radius-xl);
   background: linear-gradient(
     145deg,
-    rgba(255,255,255,0.55) 0%,
+    rgba(255,255,255,0.70) 0%,
     rgba(255,255,255,0) 55%
   );
   pointer-events: none;
@@ -183,7 +183,6 @@
     0 0 18px var(--color-x-glow),
     0 2px 12px var(--color-x-shadow);
   transition: transform var(--transition-bounce);
-  /* Inline drop-shadow filter for extra pop */
   filter: drop-shadow(0 2px 6px var(--color-x-shadow));
 }
 
@@ -192,7 +191,7 @@
 }
 
 .game-card__title-sep {
-  background: linear-gradient(135deg, #6c47ff, #ff6ac1);
+  background: linear-gradient(135deg, #3b82f6, #06b6d4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -277,27 +276,27 @@
 .btn:hover::after  { opacity: 1; }
 
 .btn:focus-visible {
-  box-shadow: 0 0 0 3px rgba(108, 71, 255, 0.45);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.40);
 }
 
 .btn:active {
   transform: scale(0.96);
 }
 
-/* Primary variant — vivid gradient */
+/* Primary variant — bright blue-to-cyan gradient */
 .btn--primary {
-  background: linear-gradient(135deg, #6c47ff 0%, #ff6ac1 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
   color: #ffffff;
   box-shadow:
-    0 4px 18px rgba(108, 71, 255, 0.40),
-    0 1px 4px rgba(0,0,0,0.10);
+    0 4px 18px rgba(59, 130, 246, 0.35),
+    0 1px 4px rgba(0,0,0,0.08);
 }
 
 .btn--primary:hover {
-  background: linear-gradient(135deg, #5534e0 0%, #e0579f 100%);
+  background: linear-gradient(135deg, #2563eb 0%, #0891b2 100%);
   box-shadow:
-    0 8px 28px rgba(108, 71, 255, 0.50),
-    0 2px 8px rgba(0,0,0,0.12);
+    0 8px 28px rgba(59, 130, 246, 0.40),
+    0 2px 8px rgba(0,0,0,0.10);
   transform: translateY(-2px);
 }
 

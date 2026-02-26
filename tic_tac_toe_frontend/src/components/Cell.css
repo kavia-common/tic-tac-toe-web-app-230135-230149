@@ -1,5 +1,5 @@
 /* =========================================================
-   Cell Component Styles – Playful Edition
+   Cell Component Styles – Light Theme
    ========================================================= */
 .cell {
   position: relative;
@@ -9,7 +9,7 @@
   width: 100%;
   aspect-ratio: 1 / 1;
   background: var(--color-surface-2);
-  border: 2px solid var(--color-border);
+  border: 1.5px solid var(--color-border);
   border-radius: var(--radius-md);
   cursor: pointer;
   transition:
@@ -47,7 +47,7 @@
 
 /* Reveal ghost on hover */
 .cell--empty:hover::after {
-  opacity: 0.20;
+  opacity: 0.18;
   transform: scale(1) rotate(0deg);
 }
 
@@ -71,7 +71,7 @@
 
 .cell--empty:focus-visible {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(108, 71, 255, 0.35);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.30);
   transform: scale(1.03);
 }
 
@@ -80,16 +80,16 @@
   cursor: default;
 }
 
-/* Occupied X cell — violet tint */
+/* Occupied X cell — light blue tint */
 .cell--x {
-  background: linear-gradient(135deg, #eeeeff 0%, var(--color-surface) 100%);
-  border-color: rgba(91, 94, 244, 0.35);
+  background: linear-gradient(135deg, #eff6ff 0%, var(--color-surface) 100%);
+  border-color: rgba(59, 130, 246, 0.30);
 }
 
-/* Occupied O cell — coral tint */
+/* Occupied O cell — light cyan tint */
 .cell--o {
-  background: linear-gradient(135deg, #fff0f3 0%, var(--color-surface) 100%);
-  border-color: rgba(255, 92, 122, 0.35);
+  background: linear-gradient(135deg, #ecfeff 0%, var(--color-surface) 100%);
+  border-color: rgba(6, 182, 212, 0.30);
 }
 
 /* Symbol inside cell */
@@ -103,7 +103,7 @@
   z-index: 1;
 }
 
-/* X symbol — violet */
+/* X symbol — bright blue */
 .cell--x .cell__symbol {
   color: var(--color-x);
   text-shadow:
@@ -111,7 +111,7 @@
     0 2px 10px var(--color-x-shadow);
 }
 
-/* O symbol — coral */
+/* O symbol — cyan */
 .cell--o .cell__symbol {
   color: var(--color-o);
   text-shadow:
@@ -127,7 +127,7 @@
 }
 
 .cell--winning.cell--x {
-  background: linear-gradient(135deg, #d5d6ff 0%, #eeeeff 100%);
+  background: linear-gradient(135deg, #bfdbfe 0%, #dbeafe 100%);
   box-shadow:
     0 0 0 3px var(--color-x),
     0 0 28px var(--color-x-glow),
@@ -135,7 +135,7 @@
 }
 
 .cell--winning.cell--o {
-  background: linear-gradient(135deg, #ffccd6 0%, #fff0f3 100%);
+  background: linear-gradient(135deg, #a5f3fc 0%, #cffafe 100%);
   box-shadow:
     0 0 0 3px var(--color-o),
     0 0 28px var(--color-o-glow),
@@ -154,7 +154,7 @@
   background: linear-gradient(
     110deg,
     transparent 18%,
-    rgba(255, 255, 255, 0.55) 50%,
+    rgba(255, 255, 255, 0.65) 50%,
     transparent 82%
   );
   animation: shimmer 1s ease 0.25s forwards;
@@ -191,22 +191,4 @@
   40%  { transform: scale(1.30) rotate(8deg); }
   70%  { transform: scale(0.95) rotate(-3deg); }
   100% { transform: scale(1) rotate(0deg); }
-}
-
-/* --- Dark mode tweaks for cells ---- */
-@media (prefers-color-scheme: dark) {
-  .cell--x {
-    background: linear-gradient(135deg, rgba(91, 94, 244, 0.22) 0%, rgba(91, 94, 244, 0.08) 100%);
-    border-color: rgba(91, 94, 244, 0.45);
-  }
-  .cell--o {
-    background: linear-gradient(135deg, rgba(255, 92, 122, 0.20) 0%, rgba(255, 92, 122, 0.08) 100%);
-    border-color: rgba(255, 92, 122, 0.45);
-  }
-  .cell--winning.cell--x {
-    background: linear-gradient(135deg, rgba(91, 94, 244, 0.35) 0%, rgba(91, 94, 244, 0.15) 100%);
-  }
-  .cell--winning.cell--o {
-    background: linear-gradient(135deg, rgba(255, 92, 122, 0.33) 0%, rgba(255, 92, 122, 0.14) 100%);
-  }
 }

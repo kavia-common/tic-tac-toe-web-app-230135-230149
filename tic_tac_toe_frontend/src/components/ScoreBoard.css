@@ -39,9 +39,9 @@
   background: linear-gradient(160deg, rgba(59, 130, 246, 0.08) 0%, rgba(59, 130, 246, 0.03) 100%);
 }
 
-/* Active O highlight — light cyan */
+/* Active O highlight — updated to match darker teal */
 .scoreboard__player--active.scoreboard__player--o {
-  background: linear-gradient(160deg, rgba(6, 182, 212, 0.08) 0%, rgba(6, 182, 212, 0.03) 100%);
+  background: linear-gradient(160deg, rgba(14, 116, 144, 0.10) 0%, rgba(14, 116, 144, 0.04) 100%);
 }
 
 /* Pulse ring behind active player indicator */
@@ -64,7 +64,7 @@
 
 .scoreboard__player--o.scoreboard__player--active::before {
   background: var(--color-o);
-  box-shadow: 0 0 0 5px rgba(6, 182, 212, 0.15);
+  box-shadow: 0 0 0 5px rgba(14, 116, 144, 0.18);
 }
 
 /* Active indicator dot */
@@ -161,10 +161,13 @@
   font-size: 2rem;
   font-weight: 900;
   line-height: 1;
-  background: linear-gradient(135deg, #3b82f6, #06b6d4);
+  /* Use darker teal endpoint so gradient text is accessible on light bg */
+  background: linear-gradient(135deg, #2563eb, #0e7490);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  /* Solid fallback color for browsers that don't support background-clip: text */
+  color: #1d4ed8;
 }
 
 /* Responsive: smaller padding on tiny screens */

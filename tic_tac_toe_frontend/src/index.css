@@ -14,11 +14,12 @@
   --color-primary:       #3b82f6;   /* bright blue */
   --color-primary-dark:  #2563eb;
   --color-primary-light: #eff6ff;
-  --color-accent:        #06b6d4;   /* cyan */
-  --color-accent-dark:   #0891b2;
+  /* Darkened cyan/teal for better contrast (passes WCAG AA on white: ~4.6:1) */
+  --color-accent:        #0e7490;
+  --color-accent-dark:   #0c6078;
   --color-accent-light:  #ecfeff;
   --color-secondary:     #64748b;
-  --color-success:       #06b6d4;
+  --color-success:       #0e7490;
   --color-error:         #EF4444;
 
   /* ---- Backgrounds ---- */
@@ -28,7 +29,8 @@
 
   /* ---- Text ---- */
   --color-text:          #111827;
-  --color-text-muted:    #6b7280;
+  /* Darkened for WCAG AA compliance on light backgrounds (~6.1:1 on #f3f4f6) */
+  --color-text-muted:    #4b5563;
 
   /* ---- Borders ---- */
   --color-border:        #e5e7eb;
@@ -40,11 +42,11 @@
   --color-x-shadow:      rgba(59, 130, 246, 0.25);
   --color-x-glow:        rgba(59, 130, 246, 0.45);
 
-  /* ---- Player O — vivid cyan ---- */
-  --color-o:             #06b6d4;
+  /* ---- Player O — darker teal (improves contrast on white: ~4.6:1) ---- */
+  --color-o:             #0e7490;
   --color-o-bg:          #ecfeff;
-  --color-o-shadow:      rgba(6, 182, 212, 0.25);
-  --color-o-glow:        rgba(6, 182, 212, 0.45);
+  --color-o-shadow:      rgba(14, 116, 144, 0.30);
+  --color-o-glow:        rgba(14, 116, 144, 0.50);
 
   /* ---- Radii ---- */
   --radius-sm:           6px;
